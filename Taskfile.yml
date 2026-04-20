@@ -7,4 +7,22 @@ tasks:
       - echo "Welcome to Tizmo! This is your Taskfile. You can define your tasks here."
     silent: true
 
-  # Will add tasks here later
+  install-terraform:
+    desc: Install terraform
+    cmds:
+      - ./scripts/terraform.sh install
+
+  uninstall-terraform:
+    desc: Uninstall terraform
+    cmds:
+      - ./scripts/terraform.sh uninstall
+
+  verify-terraform:
+    desc: Verify terraform installation
+    cmds:
+      - ./scripts/terraform.sh verify
+
+  upgrade-terraform:
+    desc: Upgrade terraform to latest version
+    cmds:
+      - ./scripts/terraform.sh upgrade
