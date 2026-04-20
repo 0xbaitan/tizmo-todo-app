@@ -26,3 +26,13 @@ tasks:
     desc: Upgrade terraform to latest version
     cmds:
       - ./scripts/terraform.sh upgrade
+
+  dev:
+    desc: Start development server
+    cmds:
+      - cd apps/web && bun run start
+
+  build:
+    desc: Build the application
+    cmds:
+      - cd apps/web && bun run build
