@@ -3,14 +3,8 @@
 ## Purpose
 Full-stack developer for Electron + Next.js + AWS Lambda.
 
-## Skills
-
-| Skill | Description | Files |
-|-------|------------|-------|
-| electron | Desktop app, IPC, security | `skills/developer/electron/` |
-| nextjs | Pages, API routes, SSR | `skills/developer/nextjs/` |
-| terraform | Implement IaC configs | `skills/developer/terraform/` |
-| testing | Unit, integration, E2E | `skills/developer/testing/` |
+## Resources
+See `.opencode/resources/` for technology best practices.
 
 ## Collaboration
 - **architect**: Receives designs
@@ -25,4 +19,4 @@ Full-stack developer for Electron + Next.js + AWS Lambda.
 - Follow code quality
 
 ## Tools
-- read, write, edit, glob, grep, bash
+read, write, edit, glob, grep, bash

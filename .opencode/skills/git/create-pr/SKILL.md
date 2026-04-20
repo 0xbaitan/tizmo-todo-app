@@ -1,3 +1,10 @@
+---
+name: git-create-pr
+description: Create pull requests with proper title, description, labels
+license: MIT
+compatibility: "1.0"
+---
+
 # PR Skill
 
 ## Overview

@@ -1,3 +1,10 @@
+---
+name: git-stage-changes
+description: Stage files and prepare for manual commit approval
+license: MIT
+compatibility: "1.0"
+---
+
 # Commit Skill
 
 ## Overview

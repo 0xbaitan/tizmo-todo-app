@@ -5,12 +5,12 @@ GitFlow version control with manual approval for all commits.
 
 ## Skills
 
-| Skill | Description | Files |
-|-------|------------|-------|
-| branch | Create/manage branches | `skills/git/branch/` |
-| commit | Stage & prepare commits | `skills/git/commit/` |
-| pr | Create pull requests | `skills/git/pr/` |
-| merge | Squash merge, cleanup | `skills/git/merge/` |
+| Skill | Description |
+|-------|------------|
+| create-branch | Create GitFlow branches |
+| stage-changes | Stage files for commit |
+| create-pr | Create pull requests |
+| squash-merge | Squash merge and cleanup |
 
 ## Branch Types
 feat/, fix/, docs/, chore/, refactor/, test/, perf/, hotfix/
