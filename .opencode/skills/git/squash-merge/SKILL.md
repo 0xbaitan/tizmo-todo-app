@@ -2,7 +2,7 @@
 name: squash-merge
 description: Handle merge workflow with squash and branch cleanup
 license: MIT
-compatibility: "1.0"
+compatibility: '1.0'
 ---
 
 # Merge Skill

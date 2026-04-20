@@ -2,7 +2,7 @@
 name: stage-changes
 description: Stage files and prepare for manual commit approval
 license: MIT
-compatibility: "1.0"
+compatibility: '1.0'
 ---
 
 # Stage Changes Skill

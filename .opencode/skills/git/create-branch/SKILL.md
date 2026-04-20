@@ -2,7 +2,7 @@
 name: create-branch
 description: Create GitFlow branches with proper naming
 license: MIT
-compatibility: "1.0"
+compatibility: '1.0'
 ---
 
 # Branch Skill
