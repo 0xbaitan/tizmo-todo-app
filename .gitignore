@@ -1,5 +1,6 @@
 # dependencies (bun install)
 node_modules
+apps/desktop/node_modules
 
 # output
 out
@@ -34,5 +35,4 @@ bun.lockb
 # IntelliJ based IDEs
 .idea
 
-# Finder (MacOS) folder config
-.DS_Store
+# caches

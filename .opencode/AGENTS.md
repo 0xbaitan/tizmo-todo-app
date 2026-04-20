@@ -35,3 +35,27 @@ tasks:
     cmds:
       - ./scripts/upgrade.sh
 ```
+
+## Apps Folder
+
+Multi-package applications reside in the `/apps/` folder at the project root.
+
+### Structure
+
+```
+apps/
+└── desktop/          # Vite + Electron + TypeScript
+    ├── src/          # Renderer (Vite frontend)
+    ├── electron/     # Electron main process
+    ├── vite.config.ts
+    ├── forge.config.ts
+    └── package.json
+```
+
+### Rules
+
+1. **Location**: All applications go in `apps/` folder
+2. **Package manager**: Use `bun` for all apps
+3. **No git**: Do not initialize git inside app folders (parent .git tracks them)
+4. **Testing**: Each app should have its own test setup
+5. **Dependencies**: Install via `bun install` in app directory
