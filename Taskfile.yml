@@ -1,0 +1,10 @@
+version: '3'
+
+tasks:
+  welcome:
+    desc: Print a welcome message
+    cmds:
+      - echo "Welcome to Tizmo! This is your Taskfile. You can define your tasks here."
+    silent: true
+
+  # Will add tasks here later
