@@ -1,5 +1,5 @@
 ---
-name: git-squash-merge
+name: squash-merge
 description: Handle merge workflow with squash and branch cleanup
 license: MIT
 compatibility: "1.0"
@@ -8,11 +8,13 @@ compatibility: "1.0"
 # Merge Skill
 
 ## Overview
+
 Handle merge workflow after PR approval with squash merging and branch cleanup.
 
 ## Merge Strategy
 
 **Squash and Merge** (preferred):
+
 - Creates single clean commit
 - Preserves linear history
 - Easy to revert

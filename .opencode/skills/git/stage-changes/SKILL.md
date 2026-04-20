@@ -1,13 +1,14 @@
 ---
-name: git-stage-changes
+name: stage-changes
 description: Stage files and prepare for manual commit approval
 license: MIT
 compatibility: "1.0"
 ---
 
-# Commit Skill
+# Stage Changes Skill
 
 ## Overview
+
 Stage changes and prepare for manual commit approval. NEVER auto-commit without user explicit approval.
 
 ## Workflow

@@ -1,5 +1,5 @@
 ---
-name: git-create-pr
+name: create-pr
 description: Create pull requests with proper title, description, labels
 license: MIT
 compatibility: "1.0"
@@ -8,6 +8,7 @@ compatibility: "1.0"
 # PR Skill
 
 ## Overview
+
 Create pull requests with proper title, description, and labels. Link to tasks.
 
 ## PR Title Format
@@ -17,6 +18,7 @@ Create pull requests with proper title, description, and labels. Link to tasks.
 ```
 
 Examples:
+
 ```
 [feat/TASK-123] Add user authentication
 [fix/TASK-456] Fix task delete error
@@ -26,15 +28,19 @@ Examples:
 
 ```markdown
 ## Summary
+
 Brief description of changes
 
 ## Changes
+
 - List of changes
 
 ## Testing
+
 How tested
 
 ## Checklist
+
 - [ ] Tests pass
 - [ ] Lint passes
 - [ ] Manual testing done
@@ -59,6 +65,7 @@ gh pr view 123
 ## Labels
 
 Add relevant labels:
+
 - `enhancement`
 - `bug`
 - `documentation`

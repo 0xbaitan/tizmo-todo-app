@@ -1,5 +1,5 @@
 ---
-name: git-create-branch
+name: create-branch
 description: Create GitFlow branches with proper naming
 license: MIT
 compatibility: "1.0"
@@ -8,20 +8,21 @@ compatibility: "1.0"
 # Branch Skill
 
 ## Overview
+
 Create and manage GitFlow branches with proper naming convention.
 
 ## Branch Types
 
-| Type | Purpose | Base |
-|------|---------|------|
-| feat/ | New features | develop |
-| fix/ | Bug fixes | develop |
-| docs/ | Documentation | develop |
-| chore/ | Maintenance | develop |
-| refactor/ | Code refactoring | develop |
-| test/ | Test additions | develop |
-| perf/ | Performance | develop |
-| hotfix/ | Urgent production fixes | main |
+| Type      | Purpose                 | Base    |
+| --------- | ----------------------- | ------- |
+| feat/     | New features            | develop |
+| fix/      | Bug fixes               | develop |
+| docs/     | Documentation           | develop |
+| chore/    | Maintenance             | develop |
+| refactor/ | Code refactoring        | develop |
+| test/     | Test additions          | develop |
+| perf/     | Performance             | develop |
+| hotfix/   | Urgent production fixes | main    |
 
 ## Branch Naming
 
