@@ -1,0 +1,29 @@
+{
+  "branch_types": [
+    {
+      "type": "feat",
+      "base": "develop",
+      "example": "feat/TASK-123-add-user-auth"
+    },
+    {
+      "type": "fix",
+      "base": "develop",
+      "example": "fix/TASK-456-fix-delete-error"
+    },
+    {
+      "type": "docs",
+      "base": "develop",
+      "example": "docs/TASK-789-update-readme"
+    },
+    {
+      "type": "chore",
+      "base": "develop",
+      "example": "chore/TASK-101-update-deps"
+    },
+    {
+      "type": "hotfix",
+      "base": "main",
+      "example": "hotfix/TASK-999-security-patch"
+    }
+  ]
+}

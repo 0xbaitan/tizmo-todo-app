@@ -1,0 +1,20 @@
+{
+  "examples": [
+    {
+      "type": "feat",
+      "message": "[feat/TASK-123] Add user authentication",
+      "description": "New feature commit"
+    },
+    {
+      "type": "fix",
+      "message": "[fix/TASK-456] Fix task delete error",
+      "description": "Bug fix commit"
+    },
+    {
+      "type": "docs",
+      "message": "[docs/TASK-789] Update README with setup instructions",
+      "description": "Documentation commit"
+    }
+  ],
+  "body_example": "[feat/TASK-123] Add user authentication\n\nThis commit adds OAuth authentication with Cognito.\n\n- Login with email/password\n- Session management\n- Logout functionality"
+}
