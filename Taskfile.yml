@@ -54,3 +54,8 @@ tasks:
     desc: Stop LocalStack
     cmds:
       - ${SCRIPTS_DIR}/localstack.sh stop
+
+  dev-infra:plan:
+    desc: Plan infrastructure changes with Terraform
+    cmds:
+      - cd aws/environments/development && terraform plan

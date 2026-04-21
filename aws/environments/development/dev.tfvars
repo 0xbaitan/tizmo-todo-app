@@ -1,0 +1,5 @@
+aws_access_key_id     = "test"
+aws_account_id        = "test"
+aws_region            = "eu-west-2"
+aws_secret_access_key = "test"
+localstack_host       = "localhost.localstack.cloud"

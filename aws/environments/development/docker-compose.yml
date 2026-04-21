@@ -1,20 +1,21 @@
 services:
   localstack:
-    container_name: tizmo-localstack
+    env_file:
+      - .env
+    container_name: localstack-main
     image: 'localstack/localstack:${LOCALSTACK_IMAGE_VERSION:-latest}'
     read_only: false # required to write to /tmp
     ports:
       - '4566:4566'
       - '4571:4571'
-    extra_hosts:
-      - '${LOCALSTACK_HOST:-localhost.tizmo.co.uk}:host-gateway'
     environment:
       - DEFAULT_REGION=${AWS_DEFAULT_REGION:-eu-west-2}
-      - LOCALSTACK_HOST=${LOCALSTACK_HOST:-localhost.tizmo.co.uk}
+      - LOCALSTACK_HOST=${LOCALSTACK_HOST_WITH_PORT:-localhost.tizmo.co.uk:4566}
       - GATEWAY_LISTEN=${GATEWAY_LISTEN:-0.0.0.0:4566}
       - DEBUG=${DEBUG:-1}
       - DOCKER_HOST=${DOCKER_HOST:-unix:///var/run/docker.sock}
       - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - MAIN_CONTAINER_NAME=${MAIN_CONTAINER_NAME:-localstack-main}
     volumes:
       - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
       - '/var/run/docker.sock:/var/run/docker.sock' # required for some AWS services like AWS Lambda

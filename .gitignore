@@ -37,3 +37,7 @@ bun.lockb
 
 # caches
 .data
+
+.terraform
+.terraform.lock.hcl
+terraform.tfstate.backup
