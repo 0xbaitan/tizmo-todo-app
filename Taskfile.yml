@@ -59,3 +59,8 @@ tasks:
     desc: Plan infrastructure changes with Terraform
     cmds:
       - cd aws/environments/development && terraform plan
+
+  manage-infra:apply:
+    desc: Apply infrastructure changes with Terraform
+    cmds:
+      - cd aws/environments/development && terraform apply -auto-approve

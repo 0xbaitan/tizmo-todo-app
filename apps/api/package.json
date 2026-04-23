@@ -1,0 +1,16 @@
+{
+  "name": "@tizmo/api",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/**/*.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outdir=build"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.161",
+    "@types/bun": "latest",
+    "esbuild": "^0.28.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

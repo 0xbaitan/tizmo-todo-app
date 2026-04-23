@@ -1,6 +1,5 @@
 # dependencies (bun install)
 node_modules
-apps/desktop/node_modules
 
 # output
 out
@@ -28,25 +27,8 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 .cache
 *.tsbuildinfo
 
-# lockfiles
-*.lock
-bun.lockb
-
 # IntelliJ based IDEs
 .idea
 
-# caches
-.data
-
-.terraform
-.terraform.lock.hcl
-terraform.tfstate.backup
-
-.venv
-
-vendor
-
-# Terraform
-*.tfvars
-*.tfstate
-*.tfstate.*
+# Finder (MacOS) folder config
+.DS_Store

@@ -14,7 +14,7 @@ services:
       - GATEWAY_LISTEN=${GATEWAY_LISTEN:-0.0.0.0:4566}
       - DEBUG=${DEBUG:-1}
       - DOCKER_HOST=${DOCKER_HOST:-unix:///var/run/docker.sock}
-      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN- }
       - MAIN_CONTAINER_NAME=${MAIN_CONTAINER_NAME:-localstack-main}
     volumes:
       - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'

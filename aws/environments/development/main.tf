@@ -29,11 +29,19 @@ provider "aws" {
     cloudwatch     = "http://cloudwatch.${var.localstack_host}:4566"
     cloudwatchlogs = "http://cloudwatchlogs.${var.localstack_host}:4566"
     ec2            = "http://ec2.${var.localstack_host}:4566"
+    lambda         = "http://lambda.${var.localstack_host}:4566"
   }
 
 }
 
-module "iam" {
-  source      = "../../modules/iam"
-  policy_name = "tizmo-dev-lambda-policy"
+module "lambda" {
+  source = "../../modules/lambda"
+
+  lambda_source_path = "/home/hexbaitan/Projects/tizmo-todo-app/apps/api/build/handler.js"
+  lambda_zip_path    = "${path.module}/lambda.zip"
+
+}
+
+output "lambda_function_url" {
+  value = module.lambda.lambda_function_url
 }
