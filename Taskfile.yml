@@ -55,12 +55,10 @@ tasks:
     cmds:
       - ${SCRIPTS_DIR}/localstack.sh stop
 
-  dev-infra:plan:
-    desc: Plan infrastructure changes with Terraform
+  terraform:
+    desc: Manage Terraform (interactive or specify -e and -c)
     cmds:
-      - cd aws/environments/development && terraform plan
-
-  manage-infra:apply:
-    desc: Apply infrastructure changes with Terraform
-    cmds:
-      - cd aws/environments/development && terraform apply -auto-approve
+      - python3 ${SCRIPTS_DIR}/terraform.py -e {{.ENV}} -c {{.COMMAND}}
+    env:
+      ENV:
+      COMMAND:
