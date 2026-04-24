@@ -173,6 +173,14 @@ def interactive_mode() -> tuple[str, str, bool]:
             command = "plan"
         break
 
+    # Prompt for output file for plan command
+    if command == "plan":
+        output_file = input(
+            "Output file for plan (optional, e.g., plan.tfplan): "
+        ).strip()
+        if output_file:
+            command += f" -out={output_file}"
+
     # Prompt for auto-approve if needed
     auto_approve = False
     base_cmd = command.split()[0]
