@@ -5,17 +5,25 @@ import subprocess
 import sys
 from pathlib import Path
 
-from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
-from prompt_toolkit.shortcuts import Button, MessageDialog, confirm, select
+from prompt_toolkit.filters import is_done
+from prompt_toolkit.formatted_text.html import HTML
+from prompt_toolkit.shortcuts import choice, confirm, yes_no_dialog
+from prompt_toolkit.styles import Style
 
 from src.modules import config
+from src.modules import destroy as destroy_module
+from src.modules import fmt as fmt_module
 from src.modules import init as init_module
 from src.modules import plan as plan_module
-from src.modules import fmt as fmt_module
-from src.modules import destroy as destroy_module
-from src.utils import load_env
-from src.utils import autoprefix_env_vars
+from src.utils import autoprefix_env_vars, load_env
+
+style = Style.from_dict(
+    {
+        "frame.border": "#884444",
+        "selected-option": "bold bg:#884444 fg:#000000",
+    }
+)
 
 
 def get_root_dir() -> Path:
@@ -71,7 +79,7 @@ def verify_environment() -> bool:
     return True
 
 
-def run_terraform_command(cmd_config: dict) -> int:
+def run_terraform_command(cmd_config: config.TerraformCommand) -> int:
     """
     Run a terraform command.
 
@@ -109,30 +117,35 @@ def run_terraform_command(cmd_config: dict) -> int:
 
 def select_environment() -> str:
     """Prompt user to select an environment."""
-    env_completer = WordCompleter(["development", "production"], ignore_case=True)
 
-    result = select.select(
-        "Select environment:",
-        choices=[
-            Button("Development", "development"),
-            Button("Production", "production"),
+    result = choice(
+        message="Select environment:",
+        options=[
+            ("development", "development"),
+            ("production", "production"),
         ],
-    ).run()
-
+        bottom_toolbar=HTML(
+            "Press <b>[Up]</b>/<b>[Down]</b> to select, <b>[Enter]</b> to accept."
+        ),
+        style=style,
+        show_frame=(not is_done()),
+    )
     return result
 
 
 def select_command() -> str:
     """Prompt user to select a terraform command."""
-    result = select.select(
-        "Select terraform command:",
-        choices=[
-            Button("Init", "init"),
-            Button("Plan", "plan"),
-            Button("Fmt", "fmt"),
-            Button("Destroy", "destroy"),
+    result = choice(
+        message="Select terraform command:",
+        options=[
+            ("init", "init"),
+            ("plan", "plan"),
+            ("fmt", "fmt"),
+            ("destroy", "destroy"),
         ],
-    ).run()
+        style=style,
+        show_frame=(not is_done()),
+    )
 
     return result
 
@@ -160,7 +173,7 @@ def run_interactive() -> None:
         sys.exit(0)
 
     # Execute command
-    cmd_config: dict = {}
+    cmd_config: config.TerraformCommand = plan_module.main(env)  # Default to plan
 
     if cmd == "init":
         cmd_config = init_module.main(env)
@@ -170,9 +183,13 @@ def run_interactive() -> None:
         cmd_config = fmt_module.main(env)
     elif cmd == "destroy":
         # Confirm before destroy
-        if confirm.confirm(
-            "Are you sure you want to destroy resources in {}?".format(env)
-        ).run():
+        should_proceed = yes_no_dialog(
+            title="Confirm Destroy",
+            text="Are you sure you want to destroy the infrastructure? This action cannot be undone.",
+            yes_text="Yes, destroy",
+            no_text="No, cancel",
+        ).run()
+        if should_proceed:
             cmd_config = destroy_module.main(env)
         else:
             print("Destroy cancelled.")

@@ -1,5 +1,6 @@
 """Constants and configuration for terraform modules."""
 
+import os
 from pathlib import Path
 from typing import TypedDict
 
@@ -14,8 +15,8 @@ class TerraformCommand(TypedDict):
 
 # Environment directories relative to project root
 TERRAFORM_DIRS: dict[str, Path] = {
-    "development": Path("aws/environments/development"),
-    "production": Path("aws/environments/production"),
+    "development": Path(f"{os.getenv('ROOT_DIR')}/aws/environments/development"),
+    "production": Path(f"{os.getenv('ROOT_DIR')}/aws/environments/production"),
 }
 
 # Environment file mapping
