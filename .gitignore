@@ -56,3 +56,5 @@ vendor
 lambda.zip
 
 __pycache__
+
+plans/

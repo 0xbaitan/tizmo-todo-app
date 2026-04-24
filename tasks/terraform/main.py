@@ -3,10 +3,13 @@
 import os
 import subprocess
 import sys
+from datetime import datetime
+from pathlib import Path
 
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.filters import is_done
 from prompt_toolkit.formatted_text.html import HTML
+from prompt_toolkit.output.base import Output
 from prompt_toolkit.shortcuts import choice, confirm, yes_no_dialog
 from prompt_toolkit.styles import Style
 
@@ -15,8 +18,9 @@ from src.modules import destroy as destroy_module
 from src.modules import fmt as fmt_module
 from src.modules import init as init_module
 from src.modules import plan as plan_module
+from src.modules import show as show_module
 from src.utils import autoprefix_env_vars, load_env
-from src.utils.path import get_root_dir
+from src.utils.path import get_root_dir, resolve_path
 
 style = Style.from_dict(
     {
@@ -133,9 +137,13 @@ def select_command() -> str:
             ("plan", "plan"),
             ("fmt", "fmt"),
             ("destroy", "destroy"),
+            ("show", "show"),
         ],
         style=style,
         show_frame=(not is_done()),
+        bottom_toolbar=HTML(
+            "Press <b>[Up]</b>/<b>[Down]</b> to select, <b>[Enter]</b> to accept."
+        ),
     )
 
     return result
@@ -169,7 +177,21 @@ def run_interactive() -> None:
     if cmd == "init":
         cmd_config = init_module.main(env)
     elif cmd == "plan":
-        cmd_config = plan_module.main(env)
+        # Ask for plan file name
+        timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+        default_filename = f"{timestamp}_{env}.tfplan"
+        filename = (
+            input(
+                f"Output file for plan (optional, default: {default_filename}): "
+            ).strip()
+            or default_filename
+        )
+        output_path: Path = resolve_path(
+            config.get_plan_dir(env)
+            / (filename + ".tfplan" if not filename.endswith(".tfplan") else filename)
+        )
+
+        cmd_config = plan_module.main(env, out_file=output_path)
     elif cmd == "fmt":
         cmd_config = fmt_module.main(env)
     elif cmd == "destroy":
@@ -185,7 +207,33 @@ def run_interactive() -> None:
         else:
             print("Destroy cancelled.")
             sys.exit(0)
+    elif cmd == "show":
+        # Ask for plan file to show
+        plan_dir = config.get_plan_dir(env)
+        plan_files = list(plan_dir.glob("*.tfplan"))
+        if not plan_files:
+            print(f"No plan files found in {plan_dir}. Please run 'plan' first.")
+            sys.exit(1)
 
+        plan_options = [(f.name, f.as_posix) for f in plan_files]
+
+        show_json = confirm(
+            message="Show output in JSON format?",
+        )
+        selected_plan = choice(
+            message="Select a plan file to show:",
+            options=plan_options,
+            style=style,
+            show_frame=(not is_done()),
+            bottom_toolbar=HTML(
+                "Press <b>[Up]</b>/<b>[Down]</b> to select, <b>[Enter]</b> to accept."
+            ),
+        )
+        cmd_config = show_module.build_show_cmd(
+            env,
+            plan_file_path=Path(config.get_plan_dir(env) / selected_plan),
+            show_json=show_json,
+        )
     exit_code = run_terraform_command(cmd_config)
     sys.exit(exit_code)
 

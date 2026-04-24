@@ -1,5 +1,7 @@
 """Terraform plan module."""
 
+from pathlib import Path
+
 from src.modules.config import TerraformCommand, get_terraform_dir, get_var_file
 
 
@@ -8,7 +10,7 @@ def get_plan_options() -> list[str]:
     return ["-out", "-var-file"]
 
 
-def build_plan_cmd(env: str, out_file: str | None = None) -> TerraformCommand:
+def build_plan_cmd(env: str, out_file: Path | None = None) -> TerraformCommand:
     """
     Build terraform plan command for the specified environment.
 
@@ -26,7 +28,7 @@ def build_plan_cmd(env: str, out_file: str | None = None) -> TerraformCommand:
         cmd.extend(["-var-file", str(var_file)])
 
     if out_file:
-        cmd.extend(["-out", out_file])
+        cmd.extend(["-out", out_file.as_posix()])
 
     return TerraformCommand(
         cmd=cmd,
@@ -35,7 +37,7 @@ def build_plan_cmd(env: str, out_file: str | None = None) -> TerraformCommand:
     )
 
 
-def main(env: str, out_file: str | None = None) -> TerraformCommand:
+def main(env: str, out_file: Path | None = None) -> TerraformCommand:
     """
     Main function for terraform plan command.
 
