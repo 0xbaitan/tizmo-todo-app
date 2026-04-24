@@ -3,7 +3,6 @@
 import os
 import subprocess
 import sys
-from pathlib import Path
 
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.filters import is_done
@@ -17,6 +16,7 @@ from src.modules import fmt as fmt_module
 from src.modules import init as init_module
 from src.modules import plan as plan_module
 from src.utils import autoprefix_env_vars, load_env
+from src.utils.path import get_root_dir
 
 style = Style.from_dict(
     {
@@ -24,14 +24,6 @@ style = Style.from_dict(
         "selected-option": "bold bg:#884444 fg:#000000",
     }
 )
-
-
-def get_root_dir() -> Path:
-    """Get the project root directory from environment or current directory."""
-    root = os.environ.get("ROOT_DIR")
-    if root:
-        return Path(root)
-    return Path(__file__).parent.resolve()
 
 
 def load_environment(env: str) -> bool:
@@ -45,11 +37,10 @@ def load_environment(env: str) -> bool:
         True if successful, False otherwise.
     """
     root_dir = get_root_dir()
-    env_file = config.get_env_file(env)
-    env_file_path = root_dir / env_file
+    env_file_path = config.get_env_file(env)
 
     if not env_file_path.exists():
-        print(f"Error: {env_file} not found in {root_dir}")
+        print(f"Error: {env_file_path} not found")
         return False
 
     try:
