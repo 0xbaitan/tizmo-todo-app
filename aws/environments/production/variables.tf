@@ -21,10 +21,3 @@ variable "aws_secret_access_key" {
   description = "The AWS secret access key for the development environment"
   sensitive   = true
 }
-
-variable "localstack_host" {
-  type        = string
-  description = "The hostname for LocalStack in the development environment"
-}
-
-

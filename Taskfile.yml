@@ -58,7 +58,7 @@ tasks:
   terraform:
     desc: Manage Terraform (interactive or specify -e and -c)
     cmds:
-      - python3 ${SCRIPTS_DIR}/terraform.py -e {{.ENV}} -c {{.COMMAND}}
+      - python3 ${SCRIPTS_DIR}/terraform.py
     env:
       ENV:
       COMMAND:

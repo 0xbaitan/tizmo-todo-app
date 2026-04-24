@@ -11,6 +11,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 # Constants
@@ -61,8 +62,8 @@ def parse_env_input(env_input: str) -> str | None:
     return None
 
 
-def load_credentials(env: str) -> bool:
-    """Load credentials from .env file for the specified environment."""
+def load_env(env: str) -> bool:
+    """Load env from .env file for the specified environment."""
     env_file = ENV_FILES.get(env)
     if not env_file:
         return False
@@ -74,6 +75,18 @@ def load_credentials(env: str) -> bool:
 
     load_dotenv(dotenv_path=env_file_path)
     return True
+
+
+def transform_credentials() -> None:
+    """Transform credentials if needed (e.g., for Terraform Cloud)."""
+    os.environ["TF_VAR_aws_access_key_id"] = os.getenv("AWS_ACCESS_KEY_ID", "")
+    os.environ["TF_VAR_aws_secret_access_key"] = os.getenv("AWS_SECRET_ACCESS_KEY", "")
+
+    # Print all environment variables
+    print("\nCurrent Environment Variables:")
+    for key, value in os.environ.items():
+        print(f"{key}={value}")
+    print()
 
 
 def verify_env_vars() -> bool:
@@ -192,14 +205,18 @@ def main():
     else:
         env = parse_env_input(args.env)
         if not env:
-            print("Error: Invalid environment. Use 'development'/'dev'/'d' or 'production'/'prod'/'p'")
+            print(
+                "Error: Invalid environment. Use 'development'/'dev'/'d' or 'production'/'prod'/'p'"
+            )
             sys.exit(1)
         command = args.command if args.command else "plan"
         auto_approve = args.yes
 
     # Load credentials
-    if not load_credentials(env):
+    if not load_env(env):
         sys.exit(1)
+    else:
+        transform_credentials()
 
     # Verify environment variables
     if not verify_env_vars():

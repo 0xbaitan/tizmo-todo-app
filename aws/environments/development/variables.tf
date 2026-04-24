@@ -26,5 +26,3 @@ variable "localstack_host" {
   type        = string
   description = "The hostname for LocalStack in the development environment"
 }
-
-
