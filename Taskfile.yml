@@ -56,9 +56,10 @@ tasks:
       - ${SCRIPTS_DIR}/localstack.sh stop
 
   terraform:
-    desc: Manage Terraform (interactive or specify -e and -c)
+    desc: Manage Terraform (interactive)
     cmds:
-      - python3 ${SCRIPTS_DIR}/terraform.py
+      - uv run python tasks/terraform/main.py
+    dir: .
     env:
-      ENV:
-      COMMAND:
+      ROOT_DIR:
+        sh: echo $(pwd)
